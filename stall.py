@@ -21,11 +21,21 @@ class Stall:
         self.opening_time = opening_time
         self.closing_time = closing_time
 
+
+    def show_price(self):
+        print("The items in this stall are: ", end = '\n\n\n')
+        for item in self.menu:
+            print("Item: {0:15}{1:10}Price: {2:3.2f}".format(item.item_name, " ",item.item_cost))
+
+            """
+                Finalise formatting for this
+            """
+
+
+
+
         """
             Still to add:
-                Function to display all items and their prices
-                    - takes in self
-                    - for loop to iterate through items and print( item name, cost) with formatting
                 Function to check operating hours
                     - takes in self
                     - returns opening hours
