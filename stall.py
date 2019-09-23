@@ -21,14 +21,18 @@ class Stall:
         self.opening_time = opening_time
         self.closing_time = closing_time
 
+    def opening_hours(self):
+        print("The opening hours are ", self.opening_time , " to ", self.closing_time)
+
+        """
+            Still needs to be improved with the use of a time class variable 
+        """
+
         """
             Still to add:
                 Function to display all items and their prices
                     - takes in self
                     - for loop to iterate through items and print( item name, cost) with formatting
-                Function to check operating hours
-                    - takes in self
-                    - returns opening hours
                 Function to check if stall is open at specified time
                     - takes in self and current time
                     - returns bool to indicate if open or closed
