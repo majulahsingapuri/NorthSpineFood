@@ -7,10 +7,12 @@
 """
 
 from menu_item import Item
-#import time
+import time
+from datetime import datetime
+from dateutil.parser import parse
 
 class Stall:
-    def __init__(self, stall_name, menu = [Item("Item", 0.00)], waiting_time_factor = 1.4, opening_time = "something", closing_time = "something"):
+    def __init__(self, stall_name, menu = [Item("Item", 0.00)], waiting_time_factor = 1.4, opening_time = "08:00", closing_time = "18:00"):
         self.stall_name = stall_name
         self.menu = menu
         self.waiting_time_factor = waiting_time_factor
@@ -18,17 +20,13 @@ class Stall:
         """
             Need to do some processing here and store the value as time rather than a string
         """
-        self.opening_time = opening_time
-        self.closing_time = closing_time
+        self.opening_time = parse(opening_time).time()
+        self.closing_time = parse(closing_time).time()
 
     def opening_hours(self):
-        print("The opening hours are ", self.opening_time , " to ", self.closing_time)
-
-        """
-            Still needs to be improved with the use of a time class variable 
-        """
-
-	def show_price(self):
+        print("The opening hours are", self.opening_time.strftime("%H:%M") , "to", self.closing_time.strftime("%H:%M"))
+        
+    def show_price(self):
         print("The items in this stall are: ", end = '\n\n\n')
         for item in self.menu:
             print("Item: {0:15}{1:10}Price: {2:3.2f}".format(item.item_name, " ",item.item_cost))
@@ -36,10 +34,13 @@ class Stall:
             """
                 Finalise formatting for this
             """
+            
+    def is_open(self, check_time = datetime.now().time()):
 
-        """
-            Still to add:
-                Function to check if stall is open at specified time
-                    - takes in self and current time
-                    - returns bool to indicate if open or closed
-        """
+        if isinstance(check_time, str):
+            check_time = parse(check_time).time()
+
+        if self.opening_time <= check_time <= self.closing_time:
+            return True
+        else:
+            return False

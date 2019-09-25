@@ -10,7 +10,7 @@
 from stall import Stall
 from menu_item import Item
 
-noodle_stall = Stall("Noodle Stall", [Item("Wanton Noodle", 4.20), Item("Fishball Noodle", 6.90)], 1.6, "0800", "1800")
+noodle_stall = Stall("Noodle Stall", [Item("Wanton Noodle", 4.20), Item("Fishball Noodle", 6.90)], 1.6, "08:00", "18:00")
 
 directory = [noodle_stall]
 """
