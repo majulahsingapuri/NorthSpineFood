@@ -16,7 +16,7 @@ noodle_stall = Stall("Noodle Stall", [Item("Mee Hoon Kueh", 3.00),
 									  Item("Yi Mein", 3.00),
 									  Item("Thin Bee Hoon", 3.00),
 									  Item("Sichuan Veg Banmian", 3.50),
-									  Item("Dumpling Banmian", 3,50),
+									  Item("Dumpling Banmian", 3.50),
 									  Item("Tom Yum Banmian", 3.50),
 									  Item("Spicy & Sour Noodles", 3.50),
 									  Item("Zha Jiang Mian", 3.50),
@@ -25,15 +25,15 @@ noodle_stall = Stall("Noodle Stall", [Item("Mee Hoon Kueh", 3.00),
 									  Item("Fried Fish Bee Hoon", 3.80),
 									  Item("Fried Fish Soup", 3.80),
 									  Item("Sliced Fish Soup", 3.80),
-									  Item("Fish Porridge", 3,80),
+									  Item("Fish Porridge", 3.80),
 									  Item("6pcs Fried Dumplings", 3.80),
 									  Item("6pcs Steamed Dumplings", 3.30)],
-					1.6, "0800", "2000")
+					1.6, "08:00", "20:00")
 mixed_rice_stall = Stall("Mixed Rice Stall", [Item("1 fish 1 meat", 4.00), 
 				   							  Item("1 meat 1 veg",2.40), 
 				  							  Item("3 veg",2.30), 
 				   							  Item("2 meat 2 veg",4.40)],
-				   		1.6, "0800", "2000")
+				   		1.6, "08:00", "20:00")
 salad_stall = Stall("Salad Stall", [Item("Chicken Salad", 3.90), 
 									Item("Smoked Salmon Salad", 4.50), 
 									Item("Egg Salad", 3.90), 
@@ -42,9 +42,9 @@ salad_stall = Stall("Salad Stall", [Item("Chicken Salad", 3.90),
 									Item("Gyudon Beef Bowl", 4.90),
 									Item("Vegan Bowl", 3.90),
 									Item("Smoked Salmon Bowl", 4.90),
-									Item("Chicken Bowl", 3.90)
+									Item("Chicken Bowl", 3.90),
 									Item("Smoked Duck Bowl", 4.90)],
-					1.6, "0800", "2000")
+					1.6, "08:00", "20:00")
 western_stall = Stall("Western Stall", [Item("Spaghetti with Sausage", 4.80),
 										Item("spaghetti with Popcorn", 4.80),
 										Item("Spaghetti with Beef Steak", 6.30),
@@ -57,7 +57,7 @@ western_stall = Stall("Western Stall", [Item("Spaghetti with Sausage", 4.80),
 										Item("Chicken Cutlet Rice", 4.80),
 										Item("Beef Steak Rice", 6.30),
 										Item("American Breakfast Set", 4.30)],
-					 1.6, "0800", "2000")
+					 1.6, "08:00", "20:00")
 indian_stall = Stall("Indian Stall", [Item("Plain prata (min 2pcs)", 0.80),
 									  Item("Prata Plaster", 1.30),
 									  Item("Onion Prata", 1.30),
@@ -88,7 +88,7 @@ indian_stall = Stall("Indian Stall", [Item("Plain prata (min 2pcs)", 0.80),
 									  Item("Mutton Briyani", 4.50),
 									  Item("Chicken Briyani", 4.50),
 									  Item("Fish Briyani", 4.50)],
-					1.6, "0800", "2000")
+					1.6, "08:00", "20:00")
 malay_stall = Stall("Malay Stall", [Item("Chicken Nasi Padang", 2.80),
 									Item("Beef Rendang", 2.50),
 									Item("Assam Fish", 2.00),
@@ -105,12 +105,6 @@ malay_stall = Stall("Malay Stall", [Item("Chicken Nasi Padang", 2.80),
 									Item("Ayam Penyet", 4.20),
 									Item("Mee Rebus", 2.80),
 									Item("Mee Siam", 2.80)],
-					1.6, "0800". "2000")
+					1.6, "08:00", "20:00")
 
-directory = [noodle_stall]
-"""
-    Things to do:
-        Hard code all the starting data for the app
-            - all the stalls and the items that they sell
-        Create an Array of all the stalls and call it directory
-"""
+directory = [noodle_stall, mixed_rice_stall, salad_stall, western_stall, indian_stall, malay_stall]
