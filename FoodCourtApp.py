@@ -9,11 +9,10 @@
 from stall import Stall
 from menu_item import Item
 from data import directory
+from main_menu import MainMenu
+from sub_menu import SubMenu
 import tkinter as tk
-
-HEIGHT = 400
-WIDTH = 400
-LARGE_FONT = ("Verdana", 12)
+import constants
 
 class FoodCourtApp(tk.Tk):
 
@@ -24,7 +23,7 @@ class FoodCourtApp(tk.Tk):
         tk.Tk.wm_title(self, "Food Court App")
         
         # Setting the Main Frame that will hold all other widgets
-        container = tk.Frame(self, width = WIDTH, height = HEIGHT)
+        container = tk.Frame(self, width = constants.WIDTH, height = constants.WIDTH)
         container.pack(expand = True, fill = "both")
 
         # Creating an empty dictionary to hold the frames
@@ -44,34 +43,6 @@ class FoodCourtApp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-
-class MainMenu(tk.Frame):
-
-    def __init__(self, parent, controller, **kw):
-        tk.Frame.__init__(self, parent, **kw)
-
-        main_title_label = tk.Label(self, text = "Main Menu", font = LARGE_FONT)
-        main_title_label.place(relx = 0.2, rely = 0, relheight = 0.05, relwidth = 0.6)
-
-        go_to_sub_menu_button = tk.Button(self, text = "Sub Menu", command = lambda: controller.show_frame(SubMenu))
-        go_to_sub_menu_button.place(relheight = 0.6, relwidth = 0.6, rely = 0.2, relx = 0.2)
-
-
-class SubMenu(tk.Frame):
-
-    def __init__(self, parent, controller, **kw):
-        tk.Frame.__init__(self, parent, **kw)
-
-        sub_title_label = tk.Label(self, text = "Sub Menu", font = LARGE_FONT)
-        sub_title_label.place(relx = 0.2, rely = 0, relheight = 0.05, relwidth = 0.6)
-
 # Running the app loop
 app = FoodCourtApp()
 app.mainloop()
-
-
-"""
-    Things to do:
-        - Create the User Interface for the whole app
-        - Move the individual Classes to their own file
-"""
