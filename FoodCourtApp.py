@@ -149,9 +149,73 @@ class StallInfo(tk.Frame):
         back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
         back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
 
+        # Open/Closed Label
+        open_closed_label = tk.Label(self, text = "Open!" if chosen_stall.is_open() else "Closed!", font = constants.MEDIUM_FONT)
+        open_closed_label.place(relx = 0.25, rely = 0.1875, relheight = 0.0625, relwidth = 0.5)
+
+        # Wait Calculation Frame
+        wait_calculation_frame = tk.Frame(self)
+        wait_calculation_frame.place(relx = 0.125, rely = 0.3125, relheight = 0.4, relwidth = 0.75)
+
+        # Wait Calculation Entry
+        wait_calculation_entry = tk.Entry(wait_calculation_frame, font = constants.SMALL_FONT, state = "normal" if chosen_stall.is_open() else "disabled")
+        wait_calculation_entry.bind('<Return>', lambda x : self.calculate_button_pressed(wait_calculation_entry.get(), chosen_stall))
+        wait_calculation_entry.place(relx = 0, rely = 0, relwidth = 0.75, relheight = 0.25)
+
+        # Wait Calculation Button
+        wait_calculation_button = tk.Button(wait_calculation_frame, text = "Calculate!", command = lambda: self.calculate_button_pressed(wait_calculation_entry.get(), chosen_stall), state = "normal" if chosen_stall.is_open() else "disabled")
+        wait_calculation_button.place(relx = 0.75, rely = 0, relwidth = 0.25, relheight = 0.25)
+
+        # Wait Calculation Label
+        self.wait_calculation_label = tk.Label(wait_calculation_frame, font = constants.MEDIUM_FONT, text = "Please enter the number\n of people in Queue" if chosen_stall.is_open() else "Stall is closed. Please come\n again when it opens!")
+        self.wait_calculation_label.place(relx = 0, rely = 0.25, relwidth = 1, relheight = 0.75)
+
+        # Show menu button
+        show_menu_button = tk.Button(self, text = "Show Menu", command = lambda: self.show_menu_button_pressed(chosen_stall))
+        show_menu_button.place(relx = 0.125, rely = 0.775, relheight = 0.125, relwidth = 0.75)
+
     def back_button_pressed(self):
         app.show_frame(SelectStall)
 
+    def calculate_button_pressed(self, entry_text, chosen_stall):
+        try:
+            num_people_in_queue = float(entry_text)
+            self.wait_calculation_label["text"] = str(round(num_people_in_queue, 0) * chosen_stall.waiting_time_factor) + " Minutes to front of Queue!"
+        except:
+            self.wait_calculation_label["text"] = "Please enter a valid Number!"
+
+    def show_menu_button_pressed(self, stall):
+        frame = MenuList(app.container, app, chosen_stall = stall)
+        app.frames[MenuList] = frame
+        frame.place(relheight = 1, relwidth = 1)
+        app.show_frame(MenuList)
+
+class MenuList(tk.Frame):
+
+    def __init__(self, parent, controller, **kw):
+
+        chosen_stall = kw["chosen_stall"]
+        kw.pop("chosen_stall")
+
+        tk.Frame.__init__(self, parent, **kw)
+
+        # About Us Title
+        main_title_label = tk.Label(self, text = chosen_stall.stall_name, font = constants.LARGE_FONT)
+        main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
+
+        # Back Button
+        back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
+        back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
+
+        # Listbox
+        menu_listbox = tk.Listbox(self, width = 80)
+        for index, _ in enumerate(chosen_stall.menu):
+            menu_listbox.insert("end", chosen_stall.show_price(index))
+        menu_listbox.place(relx = 0.125, rely = 0.2, relheight = 0.7, relwidth = 0.75)
+    
+    def back_button_pressed(self):
+        app.show_frame(StallInfo)
+        
 
 # Running the app loop
 app = FoodCourtApp()

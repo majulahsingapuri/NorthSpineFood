@@ -26,14 +26,8 @@ class Stall:
     def opening_hours(self):
         print("The opening hours are", self.opening_time.strftime("%H:%M") , "to", self.closing_time.strftime("%H:%M"))
         
-    def show_price(self):
-        print("The items in this stall are: ", end = '\n\n\n')
-        for item in self.menu:
-            print("Item: {0:15}{1:10}Price: {2:3.2f}".format(item.item_name, " ",item.item_cost))
-
-            """
-                Finalise formatting for this
-            """
+    def show_price(self, index):
+        return "Item: {0:50}{1:10}Price: {2:3.2f}".format(self.menu[index].item_name, " ",self.menu[index].item_cost)
             
     def is_open(self, check_time = datetime.now().time()):
 
