@@ -2,8 +2,8 @@
     stall.py
     North Spine Food
     
-    Created by Bhargav Singapuri on 170919
-    Copyright © 2019 Bhargav Singapuri. All rights reserved.
+    Created by Bhargav Singapuri, Jethro Prahara, Isabella Angus on 170919
+    Copyright © 2019 Bhargav Singapuri, Jethro Prahara, Isabella Angus. All rights reserved.
 """
 
 from menu_item import Item

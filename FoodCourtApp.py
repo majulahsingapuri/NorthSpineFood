@@ -2,7 +2,7 @@
     FoodCourtApp.py
     North Spine Food
     
-    Created by Bhargav Singapuri on 170919
+    Created by Bhargav Singapuri, Jethro Prahara, Isabella Angus on 170919
     Copyright © 2019 Bhargav Singapuri. All rights reserved.
 """
 
@@ -21,15 +21,15 @@ class FoodCourtApp(tk.Tk):
         tk.Tk.wm_title(self, "Food Court App")
         
         # Setting the Main Frame that will hold all other widgets
-        container = tk.Frame(self, width = constants.WIDTH, height = constants.WIDTH)
-        container.pack(expand = True, fill = "both")
+        self.container = tk.Frame(self, width = constants.START_WIDTH, height = constants.START_HEIGHT)
+        self.container.pack(expand = True, fill = "both")
 
         # Creating an empty dictionary to hold the frames
         self.frames = {}
 
         # Loading pages into memory
         for F in (MainMenu, SelectStall, AboutUs):
-            frame = F(container, self)
+            frame = F(self.container, self)
             self.frames[F] = frame
             frame.place(relheight = 1, relwidth = 1)
         
@@ -87,15 +87,23 @@ class SelectStall(tk.Frame):
         # Frame to hold all Stall Buttons
         stall_buttons_frame = tk.Frame(self)
         stall_buttons_frame.place(relx = 0.125, rely = 0.375, relwidth = 0.75, relheight = 0.5)
+        stall_buttons_frame.grid_columnconfigure(0, weight = 1)
+        stall_buttons_frame.grid_columnconfigure(1, weight = 1)
+        stall_buttons_frame.grid_rowconfigure(0, weight = 1)
+        stall_buttons_frame.grid_rowconfigure(1, weight = 1)
+        stall_buttons_frame.grid_rowconfigure(2, weight = 1)
+
 
         # Stall Buttons
         counter = 0
+        stall_buttons = []
         for index, stall in enumerate(directory):
-            stall_button = tk.Button(stall_buttons_frame, text = stall.stall_name, command = lambda : self.stall_button_pressed(stall))
-            if index % 2 == 1:
-                stall_button.grid(column = 0, row = counter)
+            stall_button = tk.Button(stall_buttons_frame, text = stall.stall_name, command = lambda stall = stall : self.stall_button_pressed(stall))
+            stall_buttons.append(stall_button)
+            if index % 2 == 0:
+                stall_button.grid(column = 0, row = counter, sticky = "NSEW", padx = 5, pady = 5)
             else:
-                stall_button.grid(column = 1, row = counter)
+                stall_button.grid(column = 1, row = counter, sticky = "NSEW", padx = 5, pady = 5)
                 counter += 1
 
 
@@ -103,7 +111,10 @@ class SelectStall(tk.Frame):
         app.show_frame(MainMenu)
 
     def stall_button_pressed(self, stall):
-        print("Chose stall " + stall.stall_name)
+        frame = StallInfo(app.container, app, chosen_stall = stall)
+        app.frames[StallInfo] = frame
+        frame.place(relheight = 1, relwidth = 1)
+        app.show_frame(StallInfo)
 
 class AboutUs(tk.Frame):
 
@@ -121,7 +132,28 @@ class AboutUs(tk.Frame):
     def back_button_pressed(self):
         app.show_frame(MainMenu)
 
+class StallInfo(tk.Frame):
+
+    def __init__(self, parent, controller, **kw):
+
+        chosen_stall = kw["chosen_stall"]
+        kw.pop("chosen_stall")
+
+        tk.Frame.__init__(self, parent, **kw)
+        
+        # About Us Title
+        main_title_label = tk.Label(self, text = chosen_stall.stall_name, font = constants.LARGE_FONT)
+        main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
+
+        # Back Button
+        back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
+        back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
+
+    def back_button_pressed(self):
+        app.show_frame(SelectStall)
+
+
 # Running the app loop
 app = FoodCourtApp()
-app.minsize(200,200)
+app.minsize(constants.MIN_HEIGHT, constants.MIN_WIDTH)
 app.mainloop()
