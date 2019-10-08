@@ -16,10 +16,6 @@ class Stall:
         self.stall_name = stall_name
         self.menu = menu
         self.waiting_time_factor = waiting_time_factor
-        
-        """
-            Need to do some processing here and store the value as time rather than a string
-        """
         self.opening_time = parse(opening_time).time()
         self.closing_time = parse(closing_time).time()
 
@@ -27,7 +23,7 @@ class Stall:
         print("The opening hours are", self.opening_time.strftime("%H:%M") , "to", self.closing_time.strftime("%H:%M"))
         
     def show_price(self, index):
-        return "Item: {0:50}{1:10}Price: {2:3.2f}".format(self.menu[index].item_name, " ",self.menu[index].item_cost)
+        return "Item: {0:.<30} Price: {1:3.2f}".format(self.menu[index].item_name, self.menu[index].item_cost)
             
     def is_open(self, check_time = datetime.now().time()):
 

@@ -3,7 +3,7 @@
     North Spine Food
     
     Created by Bhargav Singapuri, Jethro Prahara, Isabella Angus on 170919
-    Copyright © 2019 Bhargav Singapuri. All rights reserved.
+    Copyright © 2019 Bhargav Singapuri, Jethro Prahara, Isabella Angus. All rights reserved.
 """
 
 from stall import Stall
@@ -60,7 +60,7 @@ class MainMenu(tk.Frame):
         select_stall_button.place(relx = 0.125, rely = 0.125, relheight = 0.25, relwidth = 0.75)
 
         # Option 2 Button
-        option_two_button = tk.Button(buttons_frame, text = "About Us :)", font = constants.MEDIUM_FONT, command = lambda : self.option_two_button_pressed())
+        option_two_button = tk.Button(buttons_frame, text = "About Us", font = constants.MEDIUM_FONT, command = lambda : self.option_two_button_pressed())
         option_two_button.place(relx = 0.125, rely = 0.625, relheight = 0.25, relwidth = 0.75)
     
     def select_stall_button_pressed(self):
@@ -208,7 +208,7 @@ class MenuList(tk.Frame):
         back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
 
         # Listbox
-        menu_listbox = tk.Listbox(self, width = 80)
+        menu_listbox = tk.Listbox(self, font = constants.TERMINAL_FONT)
         for index, _ in enumerate(chosen_stall.menu):
             menu_listbox.insert("end", chosen_stall.show_price(index))
         menu_listbox.place(relx = 0.125, rely = 0.2, relheight = 0.7, relwidth = 0.75)

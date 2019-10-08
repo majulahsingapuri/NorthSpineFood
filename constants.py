@@ -18,3 +18,4 @@ MIN_WIDTH = 280
 LARGE_FONT = ("Verdana", 18)
 MEDIUM_FONT = ("Verdana", 15)
 SMALL_FONT = ("Verdana", 12)
+TERMINAL_FONT = ("Monaco", 12)
