@@ -6,11 +6,23 @@
     Copyright © 2019 Bhargav Singapuri, Jethro Prahara, Isabella Angus. All rights reserved.
 """
 
+import time
+from datetime import datetime
+from dateutil.parser import parse
+
 class Item:
-    def __init__(self, item_name = "", item_cost = 0.00):
+    def __init__(self, item_name = "", item_cost = 0.00, available_from_time = "08:00", available_to_time = "18:00"):
         self.item_name = item_name
         self.item_cost = item_cost
-"""
-    Things left to add:
-        Time availability for food item
-"""
+        self.available_from_time = parse(available_from_time).time()
+        self.available_to_time = parse(available_to_time).time()
+
+    def is_available(self, check_time = datetime.now().time()):
+
+        if isinstance(check_time, str):
+            check_time = parse(check_time).time()
+
+        if self.available_from_time <= check_time <= self.available_to_time:
+            return True
+        else:
+            return False
