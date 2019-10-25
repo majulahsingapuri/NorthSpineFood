@@ -10,6 +10,7 @@ from stall import Stall
 from menu_item import Item
 from data import directory
 from datetime import datetime
+from tkcalendar import DateEntry
 import time
 import tkinter as tk
 import constants
@@ -252,7 +253,7 @@ class MenuList(tk.Frame):
         time_picker.minsize(constants.MIN_HEIGHT, constants.MIN_WIDTH)
 
     # Reloads data in Menu List based on either system time or user entered time
-    def list_reload_data(self, chosen_stall, check_time = ""):
+    def list_reload_data(self, chosen_stall, check_time = "", check_day = datetime.today().day):
         self.menu_listbox.delete(0, "end")
         if check_time == "":
             for index, item in enumerate(chosen_stall.menu):
@@ -260,7 +261,7 @@ class MenuList(tk.Frame):
                     self.menu_listbox.insert("end", chosen_stall.show_price(index))
         else:
             for index, item in enumerate(chosen_stall.menu):
-                if item.is_available(check_time):
+                if item.is_available(check_time, check_day):
                     self.menu_listbox.insert("end", chosen_stall.show_price(index))
         
 class TimePicker(tk.Toplevel):
@@ -282,11 +283,13 @@ class TimePicker(tk.Toplevel):
 
         # Spinboxes
         hour = tk.IntVar(value = datetime.now().time().hour)
-        self.hour_spinbox = tk.Spinbox(spinbox_frame, from_ = 00, to = 23, increment = 1, textvariable = hour, format="%02.0f", state = "readonly")
-        self.hour_spinbox.place(relx = 0, rely = 0.25, relheight = 1, relwidth = 0.5)
+        self.hour_spinbox = tk.Spinbox(spinbox_frame, from_ = 00, to = 23, increment = 1, textvariable = hour, format = "%02.0f", state = "readonly")
+        self.hour_spinbox.place(relx = 0, rely = 0.25, relheight = 1, relwidth = 0.3)
         minute = tk.IntVar(value = (((datetime.now().time().minute // 10) * 10)))
-        self.minute_spinbox = tk.Spinbox(spinbox_frame, from_ = 00, to = 50, increment = 10, textvariable = minute, format="%02.0f", state = "readonly")
-        self.minute_spinbox.place(relx = 0.5, rely = 0.25, relheight = 1, relwidth = 0.5)
+        self.minute_spinbox = tk.Spinbox(spinbox_frame, from_ = 00, to = 50, increment = 10, textvariable = minute, format = "%02.0f", state = "readonly")
+        self.minute_spinbox.place(relx = 0.3, rely = 0.25, relheight = 1, relwidth = 0.3)
+        self.date_entry = DateEntry(spinbox_frame, state = "normal", firstweekday = "monday", mindate = datetime.today().date(), showweeknumbers = False, showothermonthdays = False, locale = "en_SG", date_pattern = "dd-mm-yyyy")
+        self.date_entry.place(relx = 0.6, rely = 0.25, relheight = 1, relwidth = 0.4)
 
         # Buttons Frame
         buttons_frame = tk.Frame(self)
@@ -297,15 +300,15 @@ class TimePicker(tk.Toplevel):
         current_time_button.place(relx = 0.125, rely = 0.125, relheight = 0.25, relwidth = 0.75)
 
         # Submit button
-        submit_button = tk.Button(buttons_frame, text = "Submit", command = lambda: self.submit_button_pressed(self.hour_spinbox.get(), self.minute_spinbox.get(), parent, chosen_stall))
+        submit_button = tk.Button(buttons_frame, text = "Submit", command = lambda: self.submit_button_pressed(self.hour_spinbox.get(), self.minute_spinbox.get(), self.date_entry.get_date(), parent, chosen_stall))
         submit_button.place(relx = 0.125, rely = 0.5, relheight = 0.25, relwidth = 0.75)
 
     # Takes entered Time from Spinboxes and updates the Menu List
-    def submit_button_pressed(self, hour_time, minute_time, parent, chosen_stall):
+    def submit_button_pressed(self, hour_time, minute_time, on_day, parent, chosen_stall):
         hour_time = int(hour_time)
         minute_time = int(minute_time)
-        time = str(hour_time) + ":" + str(minute_time)
-        parent.list_reload_data(chosen_stall, time)
+        time = str(hour_time).format("%02.0f") + ":" + str(minute_time).format("%02.0f")
+        parent.list_reload_data(chosen_stall, time, on_day.weekday())
         self.destroy()
 
     # Resets Hour and Minute in Spinbox to Current Time
