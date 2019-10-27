@@ -317,6 +317,7 @@ class TimePicker(tk.Toplevel):
         minute = tk.IntVar(value = (((datetime.now().time().minute // 10) * 10)))
         self.hour_spinbox["textvariable"] = hour
         self.minute_spinbox["textvariable"] = minute
+        self.date_entry.set_date(datetime.now().date())
 
 class RangeError(Exception):
     pass
