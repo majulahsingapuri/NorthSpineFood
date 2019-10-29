@@ -2,8 +2,8 @@
     menu_item.py
     North Spine Food
     
-    Created by Bhargav Singapuri, Jethro Prahara, Isabella Angus on 170919
-    Copyright © 2019 Bhargav Singapuri, Jethro Prahara, Isabella Angus. All rights reserved.
+    Created by Bhargav Singapuri, Jethro Prahara, Isabela Angus on 170919
+    Copyright © 2019 Bhargav Singapuri, Jethro Prahara, Isabela Angus. All rights reserved.
 """
 
 import time
