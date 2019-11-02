@@ -11,6 +11,7 @@ from menu_item import Item
 from data import directory
 from datetime import datetime
 from tkcalendar import DateEntry
+from random import choice
 import time
 import tkinter as tk
 import constants
@@ -31,7 +32,7 @@ class FoodCourtApp(tk.Tk):
         self.frames = {}
 
         # Loading pages into memory
-        for F in (MainMenu, SelectStall, AboutUs):
+        for F in (MainMenu, SelectStall, FeelingHungry):
             frame = F(self.container, self)
             self.frames[F] = frame
             frame.place(relheight = 1, relwidth = 1)
@@ -63,16 +64,16 @@ class MainMenu(tk.Frame):
         select_stall_button.place(relx = 0.125, rely = 0.125, relheight = 0.25, relwidth = 0.75)
 
         # Option 2 Button
-        option_two_button = tk.Button(buttons_frame, text = "About Us", font = constants.MEDIUM_FONT, command = lambda : self.option_two_button_pressed())
+        option_two_button = tk.Button(buttons_frame, text = "I'm Feeling Hungry", font = constants.MEDIUM_FONT, command = lambda : self.feeling_hungry_pressed())
         option_two_button.place(relx = 0.125, rely = 0.625, relheight = 0.25, relwidth = 0.75)
     
     # Changing view to SelectStall
     def select_stall_button_pressed(self):
         app.show_frame(SelectStall)
 
-    # Changing view to About Us
-    def option_two_button_pressed(self):
-        app.show_frame(AboutUs)
+    # Changing view to FeelingHungry
+    def feeling_hungry_pressed(self):
+        app.show_frame(FeelingHungry)
 
 class SelectStall(tk.Frame):
 
@@ -125,14 +126,20 @@ class SelectStall(tk.Frame):
         frame.place(relheight = 1, relwidth = 1)
         app.show_frame(StallInfo)
 
-class AboutUs(tk.Frame):
+class FeelingHungry(tk.Frame):
 
     def __init__(self, parent, controller, **kw):
         tk.Frame.__init__(self, parent, **kw)
 
-        # About Us Title
-        main_title_label = tk.Label(self, text = "About Us", font = constants.LARGE_FONT)
+        # Today's Choice Title
+        main_title_label = tk.Label(self, text = "Today's Choice", font = constants.LARGE_FONT)
         main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
+
+        # Today's Choice Item
+        random_stall = choice(directory)
+        random_item = choice(random_stall.menu)
+        choice_item_label = tk.Label(self, text = "How about: {0}\nfrom the: {1}?".format(random_item.item_name, random_stall.stall_name), font = constants.MEDIUM_FONT)
+        choice_item_label.place(relx = 0.05, rely = 0.4375, relheight = 0.125, relwidth = 0.9)
 
         # Back Button
         back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
@@ -141,11 +148,6 @@ class AboutUs(tk.Frame):
     # Navigates back to Main Menu
     def back_button_pressed(self):
         app.show_frame(MainMenu)
-
-"""
-    Things to do:
-        - Fill up About Us with something
-"""
 
 class StallInfo(tk.Frame):
 
