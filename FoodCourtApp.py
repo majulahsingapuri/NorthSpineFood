@@ -136,10 +136,13 @@ class FeelingHungry(tk.Frame):
         main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
 
         # Today's Choice Item
-        random_stall = choice(directory)
-        random_item = choice(random_stall.menu)
-        choice_item_label = tk.Label(self, text = "How about: {0}\nfrom the: {1}?".format(random_item.item_name, random_stall.stall_name), font = constants.MEDIUM_FONT)
-        choice_item_label.place(relx = 0.05, rely = 0.4375, relheight = 0.125, relwidth = 0.9)
+        self.choice_item_label = tk.Label(self, font = constants.MEDIUM_FONT)
+        self.choice_item_label.place(relx = 0.05, rely = 0.4375, relheight = 0.125, relwidth = 0.9)
+        self.reload_data()
+
+        # Another Choice
+        another_choice = tk.Button(self, text = "Another One", command = lambda: self.reload_data())
+        another_choice.place(relx = 0.05, rely = 0.5625, relheight = 0.125, relwidth = 0.9)
 
         # Back Button
         back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
@@ -148,6 +151,11 @@ class FeelingHungry(tk.Frame):
     # Navigates back to Main Menu
     def back_button_pressed(self):
         app.show_frame(MainMenu)
+    
+    def reload_data(self):
+        random_stall = choice(directory)
+        random_item = choice(random_stall.menu)
+        self.choice_item_label["text"] = "How about: {0}\nfrom the: {1}?".format(random_item.item_name, random_stall.stall_name)
 
 class StallInfo(tk.Frame):
 
