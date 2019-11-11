@@ -15,6 +15,7 @@ from random import choice
 import time
 import tkinter as tk
 import constants
+from PIL import Image, ImageTk
 
 class FoodCourtApp(tk.Tk):
 
@@ -51,21 +52,26 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller, **kw):
         tk.Frame.__init__(self, parent, **kw)
 
+        # Background Transparent Image
+        load = Image.open("./Images/prefrontal-cortex.jpg")
+        render = ImageTk.PhotoImage(load)
+
+        # Main Menu Background Image Frame
+        main_back_image = tk.Label(self, image = render) 
+        main_back_image.image = render
+        main_back_image.place(relheight = 1, relwidth = 1)
+
         # Main Menu Title
-        main_title_label = tk.Label(self, text = "Main Menu", font = constants.LARGE_FONT)
+        main_title_label = tk.Label(main_back_image, text = "Main Menu", font = constants.LARGE_FONT)
         main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
 
-        # Buttons Frame
-        buttons_frame = tk.Frame(self)
-        buttons_frame.place(relx = 0.125, rely = 0.375, relwidth = 0.75, relheight = 0.5)
-
         # Select Stall Button
-        select_stall_button = tk.Button(buttons_frame, text = "Select Stall", font = constants.MEDIUM_FONT, command = lambda : self.select_stall_button_pressed())
-        select_stall_button.place(relx = 0.125, rely = 0.125, relheight = 0.25, relwidth = 0.75)
+        select_stall_button = tk.Button(main_back_image, text = "Select Stall", font = constants.MEDIUM_FONT, command = lambda : self.select_stall_button_pressed())
+        select_stall_button.place(relx = 0.21875, rely = 0.4375, relheight = 0.125, relwidth = 0.5625)
 
-        # Option 2 Button
-        option_two_button = tk.Button(buttons_frame, text = "I'm Feeling Hungry", font = constants.MEDIUM_FONT, command = lambda : self.feeling_hungry_pressed())
-        option_two_button.place(relx = 0.125, rely = 0.625, relheight = 0.25, relwidth = 0.75)
+        # Feeling Hungry Button
+        feeling_hungry_button = tk.Button(main_back_image, text = "I'm Feeling Hungry", font = constants.MEDIUM_FONT, command = lambda : self.feeling_hungry_pressed())
+        feeling_hungry_button.place(relx = 0.21875, rely = 0.6875, relheight = 0.125, relwidth = 0.5625)
     
     # Changing view to SelectStall
     def select_stall_button_pressed(self):
@@ -80,16 +86,25 @@ class SelectStall(tk.Frame):
     def __init__(self, parent, controller, **kw):
         tk.Frame.__init__(self, parent, **kw)
 
+        #Image
+        load = Image.open("./Images/prefrontal-cortex.jpg")
+        render = ImageTk.PhotoImage(load)
+        
+        # Stall Background Image Frame
+        stall_back_image = tk.Label(self, image = render) 
+        stall_back_image.image = render
+        stall_back_image.place(relheight = 1, relwidth = 1)
+
         # Setting title of the SelectStall
-        sub_title_label = tk.Label(self, text = "Select Stall", font = constants.LARGE_FONT)
+        sub_title_label = tk.Label(stall_back_image, text = "Select Stall", font = constants.LARGE_FONT)
         sub_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
 
         # Back Button
-        back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
+        back_button = tk.Button(stall_back_image, text = "Back", command = lambda: self.back_button_pressed())
         back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
 
         # Frame to hold all Stall Buttons
-        stall_buttons_frame = tk.Frame(self)
+        stall_buttons_frame = tk.Frame(stall_back_image)
         stall_buttons_frame.place(relx = 0.125, rely = 0.375, relwidth = 0.75, relheight = 0.5)
 
         # Configures the 2 Grids for the Stall Buttons
@@ -131,21 +146,30 @@ class FeelingHungry(tk.Frame):
     def __init__(self, parent, controller, **kw):
         tk.Frame.__init__(self, parent, **kw)
 
+         #  Image
+        load = Image.open("./Images/hungry.png")
+        render = ImageTk.PhotoImage(load)
+
+        # Main Menu Background Image Frame
+        khaled_image = tk.Label(self, image = render) 
+        khaled_image.image = render
+        khaled_image.place(relheight = 1, relwidth = 1)
+
         # Today's Choice Title
-        main_title_label = tk.Label(self, text = "Today's Choice", font = constants.LARGE_FONT)
+        main_title_label = tk.Label(khaled_image, text = "Today's Choice", font = constants.LARGE_FONT)
         main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
 
         # Today's Choice Item
-        self.choice_item_label = tk.Label(self, font = constants.MEDIUM_FONT)
+        self.choice_item_label = tk.Label(khaled_image, font = constants.MEDIUM_FONT)
         self.choice_item_label.place(relx = 0.05, rely = 0.4375, relheight = 0.125, relwidth = 0.9)
         self.reload_data()
 
         # Another Choice
-        another_choice = tk.Button(self, text = "Another One", command = lambda: self.reload_data())
+        another_choice = tk.Button(khaled_image, text = "Another One", command = lambda: self.reload_data())
         another_choice.place(relx = 0.05, rely = 0.5625, relheight = 0.125, relwidth = 0.9)
 
         # Back Button
-        back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
+        back_button = tk.Button(khaled_image, text = "Back", command = lambda: self.back_button_pressed())
         back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
 
     # Navigates back to Main Menu
@@ -166,37 +190,42 @@ class StallInfo(tk.Frame):
 
         tk.Frame.__init__(self, parent, **kw)
         
-        # About Us Title
-        main_title_label = tk.Label(self, text = chosen_stall.stall_name, font = constants.LARGE_FONT)
+         #Image
+        load = Image.open(chosen_stall.image_path)
+        render = ImageTk.PhotoImage(load)
+        
+        # Stall Background Image Frame
+        stall_image = tk.Label(self, image = render) 
+        stall_image.image = render
+        stall_image.place(relheight = 1, relwidth = 1)
+
+        # Chosen Stall Name Title
+        main_title_label = tk.Label(stall_image, text = chosen_stall.stall_name, font = constants.LARGE_FONT)
         main_title_label.place(relx = 0.25, rely = 0.0625, relheight = 0.125, relwidth = 0.5)
 
         # Back Button
-        back_button = tk.Button(self, text = "Back", command = lambda: self.back_button_pressed())
+        back_button = tk.Button(stall_image, text = "Back", command = lambda: self.back_button_pressed())
         back_button.place(relx = 0.0125, rely = 0.0625, height = 30, width = 50)
 
         # Open/Closed Label
-        open_closed_label = tk.Label(self, text = "Open!" if chosen_stall.is_open() else chosen_stall.opening_hours(), font = constants.MEDIUM_FONT)
-        open_closed_label.place(relx = 0.25, rely = 0.1875, relheight = 0.0625, relwidth = 0.5)
-
-        # Wait Calculation Frame
-        wait_calculation_frame = tk.Frame(self)
-        wait_calculation_frame.place(relx = 0.125, rely = 0.3125, relheight = 0.4, relwidth = 0.75)
+        open_closed_label = tk.Label(stall_image, text = "Open!" if chosen_stall.is_open() else chosen_stall.opening_hours(), font = constants.MEDIUM_FONT)
+        open_closed_label.place(relx = 0.25, rely = 0.21875, relheight = 0.125, relwidth = 0.5)
 
         # Wait Calculation Entry - Disabled if Stall is closed
-        wait_calculation_entry = tk.Entry(wait_calculation_frame, font = constants.SMALL_FONT, state = "normal" if chosen_stall.is_open() else "disabled")
+        wait_calculation_entry = tk.Entry(stall_image, font = constants.SMALL_FONT, state = "normal" if chosen_stall.is_open() else "disabled")
         wait_calculation_entry.bind('<Return>', lambda x : self.calculate_button_pressed(wait_calculation_entry.get(), chosen_stall))
-        wait_calculation_entry.place(relx = 0, rely = 0, relwidth = 0.75, relheight = 0.25)
+        wait_calculation_entry.place(relx = 0.125, rely = 0.625, relwidth = 0.5, relheight = 0.125)
 
         # Wait Calculation Button - Disabled if Stall is closed
-        wait_calculation_button = tk.Button(wait_calculation_frame, text = "Calculate!", command = lambda: self.calculate_button_pressed(wait_calculation_entry.get(), chosen_stall), state = "normal" if chosen_stall.is_open() else "disabled")
-        wait_calculation_button.place(relx = 0.75, rely = 0, relwidth = 0.25, relheight = 0.25)
+        wait_calculation_button = tk.Button(stall_image, text = "Calculate!", command = lambda: self.calculate_button_pressed(wait_calculation_entry.get(), chosen_stall), state = "normal" if chosen_stall.is_open() else "disabled")
+        wait_calculation_button.place(relx = 0.625, rely = 0.625, relwidth = 0.25, relheight = 0.125)
 
         # Wait Calculation Label - Default message if Stall is closed
-        self.wait_calculation_label = tk.Label(wait_calculation_frame, font = constants.MEDIUM_FONT, text = "Please enter the number\n of people in Queue" if chosen_stall.is_open() else "Stall is closed. Please come\n again when it opens!")
-        self.wait_calculation_label.place(relx = 0, rely = 0.25, relwidth = 1, relheight = 0.75)
+        self.wait_calculation_label = tk.Label(stall_image, font = constants.MEDIUM_FONT, text = "Please enter the number\n of people in Queue" if chosen_stall.is_open() else "Stall is closed. Please come\n again when it opens!")
+        self.wait_calculation_label.place(relx = 0.125, rely = 0.375, relwidth = 0.75, relheight = 0.1875)
 
         # Show menu button
-        show_menu_button = tk.Button(self, text = "Show Menu", command = lambda: self.show_menu_button_pressed(chosen_stall))
+        show_menu_button = tk.Button(stall_image, text = "Show Menu", command = lambda: self.show_menu_button_pressed(chosen_stall))
         show_menu_button.place(relx = 0.125, rely = 0.775, relheight = 0.125, relwidth = 0.75)
 
     # Navigates back to Select Stall
