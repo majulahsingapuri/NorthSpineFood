@@ -27,7 +27,7 @@ class Stall:
     def show_price(self, index):
         return "Item: {0:.<30} Price: {1:3.2f}".format(self.menu[index].item_name, self.menu[index].item_cost)
             
-    def is_open(self, check_time = datetime.now().time(), check_day = datetime.now().day):
+    def is_open(self, check_time = datetime.now().time(), check_day = datetime.now().weekday()):
 
         if isinstance(check_time, str):
             check_time = parse(check_time).time()

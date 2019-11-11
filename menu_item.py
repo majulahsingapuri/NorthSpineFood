@@ -18,7 +18,7 @@ class Item:
         self.available_to_time = parse(available_to_time).time()
         self.days_available = days_available
 
-    def is_available(self, check_time = datetime.now().time(), check_day = datetime.now().day):
+    def is_available(self, check_time = datetime.now().time(), check_day = datetime.now().weekday()):
 
         if isinstance(check_time, str):
             check_time = parse(check_time).time()

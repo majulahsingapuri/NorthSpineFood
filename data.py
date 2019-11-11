@@ -33,7 +33,7 @@ mixed_rice_stall = Stall("Mixed Rice Stall", [Item("1 fish 1 meat", 4.00, "08:00
 				   							  Item("1 meat 1 veg", 2.40, "15:30", "20:00", [0,1,3,5,6]), 
 				  							  Item("3 veg",2.30, "08:00", "20:00", [0,1,2,3,4,5,6]), 
 				   							  Item("2 meat 2 veg",4.40, "08:00", "15:30", [0,1,3,5,6])],
-				   	1.2, "08:00", "20:00")
+				   	1.2, "08:00", "20:00", [0,1,2,3,4,5,6], "mixed_rice.jpeg")
 salad_stall = Stall("Salad Stall", [Item("Chicken Salad", 3.90, "12:00", "18:00", [0,2,3,4,6]), 
 									Item("Smoked Salmon Salad", 4.50, "17:30", "20:00", [0,1,5,6]), 
 									Item("Egg Salad", 3.90, "08:00", "11:00", [0,2,3,4,6]), 
