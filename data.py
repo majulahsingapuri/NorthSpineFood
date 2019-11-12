@@ -28,23 +28,23 @@ noodle_stall = Stall("Noodle Stall", [Item("Mee Hoon Kueh", 3.00, "11:00", "15:0
 									  Item("Fish Porridge", 3.80, "08:00", "14:00", [0,1,2,3,4,5,6]),
 									  Item("6pcs Fried Dumplings", 3.80, "13:00","20:00", [0,1,2,3,4,5,6]),
 									  Item("6pcs Steamed Dumplings", 3.30, "13:00", "20:00", [0,1,2,3,4,5,6])],
-					1.8, "08:00", "20:00")
+					1.8, "08:00", "20:00", [0,1,2,3,4,5,6,], "noodle_stall.jpeg")
 mixed_rice_stall = Stall("Mixed Rice Stall", [Item("1 fish 1 meat", 4.00, "08:00", "14:00", [0,2,4,6]), 
 				   							  Item("1 meat 1 veg", 2.40, "15:30", "20:00", [0,1,3,5,6]), 
 				  							  Item("3 veg",2.30, "08:00", "20:00", [0,1,2,3,4,5,6]), 
 				   							  Item("2 meat 2 veg",4.40, "08:00", "15:30", [0,1,3,5,6])],
-				   	1.2, "08:00", "20:00")
-salad_stall = Stall("Salad Stall", [Item("Chicken Salad", 3.90, "12:00", "18:00", [0,2,3,4,6]), 
-									Item("Smoked Salmon Salad", 4.50, "17:30", "20:00", [0,1,5,6]), 
-									Item("Egg Salad", 3.90, "08:00", "11:00", [0,2,3,4,6]), 
-									Item("Smoked Duck Salad", 4.50, "17:30", "20:00", [0,1,5,6]),
-									Item("Tofu Salad", 3.90, "12:00", "18:00", [0,2,3,4,6]),
-									Item("Gyudon Beef Bowl", 4.90, "11:00", "15:00", [0,6]),
-									Item("Vegan Bowl", 3.90, "08:00", "11:00", [0,1,3,5,6]),
-									Item("Smoked Salmon Bowl", 4.90, "11:00", "15:00", [0,6]),
-									Item("Chicken Bowl", 3.90, "16:00", "20:00", [0,1,3,5,6]),
-									Item("Smoked Duck Bowl", 4.90, "11:00", "15:00", [0,6])],
-					1.3, "08:00", "20:00")
+				   	1.2, "08:00", "20:00", [0,1,2,3,4,5,6], "mixed_rice.jpg")
+chicken_rice_stall = Stall("Chicken Rice Stall", [Item("Steamed Chicken Rice", 3.90, "12:00", "18:00", [0,2,3,4,6]), 
+									Item("Roasted Chicken Rice", 4.50, "17:30", "20:00", [0,1,5,6]), 
+									Item("Chicken Noodle", 3.90, "08:00", "11:00", [0,2,3,4,6]), 
+									Item("Chicken Soup", 4.50, "17:30", "20:00", [0,1,5,6]),
+									Item("Fried Wanton", 3.90, "12:00", "18:00", [0,2,3,4,6]),
+									Item("Chicken Wanton", 4.90, "11:00", "15:00", [0,6]),
+									Item("Char Siew Rice", 3.90, "08:00", "11:00", [0,1,3,5,6]),
+									Item("Char Siew Noodle", 4.90, "11:00", "15:00", [0,6]),
+									Item("Char Siew Wanton", 3.90, "16:00", "20:00", [0,1,3,5,6]),
+									Item("Steamed Wanton", 4.90, "11:00", "15:00", [0,6])],
+					1.3, "08:00", "20:00", [0,1,2,3,4,5,6,], "chicken_rice.jpg")
 western_stall = Stall("Western Stall", [Item("Spaghetti with Sausage", 4.80, "11:00", "15:00",  [0,1,2,3]),
 										Item("spaghetti with Popcorn", 4.80, "11:00", "15:00",  [0,1,2,3]),
 										Item("Spaghetti with Beef Steak", 6.30, "17:00", "20:00",  [0,1,2,3]),
@@ -57,7 +57,7 @@ western_stall = Stall("Western Stall", [Item("Spaghetti with Sausage", 4.80, "11
 										Item("Chicken Cutlet Rice", 4.80, "12:00", "20:00",  [4,5,6]),
 										Item("Beef Steak Rice", 6.30, "17:30", "20:00",  [4,5,6]),
 										Item("American Breakfast Set", 4.30, "08:00", "11:30",  [0,1,2,3,4,5,6])],
-					2.0, "08:00", "20:00")
+					2.0, "08:00", "20:00",[0,1,2,3,4,5,6,], "western_stall.jpeg")
 indian_stall = Stall("Indian Stall", [Item("Plain prata (min 2pcs)", 0.80, "08:00", "20:00", [0,1,2,3,4,5,6]),
 									  Item("Prata Plaster", 1.30, "08:00", "11:00", [0,1,2,3,4,5,6]),
 									  Item("Onion Prata", 1.30, "11:00", "15:00", [1,3,5]),
@@ -88,7 +88,7 @@ indian_stall = Stall("Indian Stall", [Item("Plain prata (min 2pcs)", 0.80, "08:0
 									  Item("Mutton Briyani", 4.50, "17:00", "20:00", [0,1,2,6]),
 									  Item("Chicken Briyani", 4.50, "11:00", "16:00", [0,1,3,4]),
 									  Item("Fish Briyani", 4.50, "12:00", "20:00", [5,6])],
-					1.9, "08:00", "20:00")
+					1.9, "08:00", "20:00", [0,1,2,3,4,5,6,], "indian_stall.jpg")
 malay_stall = Stall("Malay Stall", [Item("Chicken Nasi Padang", 2.80, "08:00", "13:00", [0,1,5,6]),
 									Item("Beef Rendang", 2.50, "08:00", "13:00", [0,1,2,3]),
 									Item("Assam Fish", 2.00, "13:00", "20:00", [0,1,2,3]),
@@ -105,6 +105,6 @@ malay_stall = Stall("Malay Stall", [Item("Chicken Nasi Padang", 2.80, "08:00", "
 									Item("Ayam Penyet", 4.20, "11:00", "15:00", [0,1,2,3,4,5,6]),
 									Item("Mee Rebus", 2.80, "08:00", "13:00", [0,1,2,3]),
 									Item("Mee Siam", 2.80, "08:00", "13:00", [4,5,6])],
-					1.2, "08:00", "20:00")
+					1.2, "08:00", "20:00",[0,1,2,3,4,5,6,], "malay_stall.jpg")
 
-directory = [noodle_stall, mixed_rice_stall, salad_stall, western_stall, indian_stall, malay_stall]
+directory = [noodle_stall, mixed_rice_stall, chicken_rice_stall, western_stall, indian_stall, malay_stall]
