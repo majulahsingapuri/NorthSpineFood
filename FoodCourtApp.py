@@ -12,10 +12,10 @@ from data import directory
 from datetime import datetime
 from tkcalendar import DateEntry
 from random import choice
+from PIL import Image, ImageTk
 import time
 import tkinter as tk
 import constants
-from PIL import Image, ImageTk
 
 class FoodCourtApp(tk.Tk):
 
@@ -53,7 +53,7 @@ class MainMenu(tk.Frame):
         tk.Frame.__init__(self, parent, **kw)
 
         # Background Transparent Image
-        load = Image.open("./Images/prefrontal-cortex.jpg")
+        load = Image.open("./Images/western_stall.jpg")
         render = ImageTk.PhotoImage(load)
 
         # Main Menu Background Image Frame
@@ -87,7 +87,7 @@ class SelectStall(tk.Frame):
         tk.Frame.__init__(self, parent, **kw)
 
         #Image
-        load = Image.open("./Images/prefrontal-cortex.jpg")
+        load = Image.open("./Images/western_stall.jpg")
         render = ImageTk.PhotoImage(load)
         
         # Stall Background Image Frame
