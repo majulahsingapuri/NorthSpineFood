@@ -57,7 +57,7 @@ western_stall = Stall("Western Stall", [Item("Spaghetti with Sausage", 4.80, "11
 										Item("Chicken Cutlet Rice", 4.80, "12:00", "20:00",  [4,5,6]),
 										Item("Beef Steak Rice", 6.30, "17:30", "20:00",  [4,5,6]),
 										Item("American Breakfast Set", 4.30, "08:00", "11:30",  [0,1,2,3,4,5,6])],
-					2.0, "08:00", "20:00",[0,1,2,3,4,5,6,], "western_stall.jpeg")
+					2.0, "08:00", "20:00",[0,1,2,3,4,5,6,], "western_stall.jpg")
 indian_stall = Stall("Indian Stall", [Item("Plain prata (min 2pcs)", 0.80, "08:00", "20:00", [0,1,2,3,4,5,6]),
 									  Item("Prata Plaster", 1.30, "08:00", "11:00", [0,1,2,3,4,5,6]),
 									  Item("Onion Prata", 1.30, "11:00", "15:00", [1,3,5]),
